@@ -3,87 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Mobile App</title>
-    
+    <title>My Mobile PWA</title>
     <link rel="manifest" href="manifest.json">
-
     <style>
-        /* CSS: The Look */
         body {
-            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto;
-            background-color: #f0f2f5;
+            font-family: sans-serif;
+            background: #121212;
+            color: white;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            overflow: hidden;
         }
-
-        .app-card {
-            text-align: center;
-            background: white;
-            padding: 40px 20px;
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            width: 85%;
-            max-width: 350px;
+        .icon-preview {
+            width: 100px;
+            height: 100px;
+            background: #333;
+            border-radius: 20%;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-
-        h1 { color: #1a1a1b; margin-bottom: 10px; }
-        p { color: #65676b; margin-bottom: 30px; }
-
-        .main-btn {
-            background-color: #007bff;
-            color: white;
+        button {
+            padding: 15px 30px;
+            border-radius: 50px;
             border: none;
-            padding: 18px 40px;
-            font-size: 1.1rem;
+            background: #00d1b2;
+            color: black;
             font-weight: bold;
-            border-radius: 15px;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(0,123,255,0.3);
-        }
-
-        .main-btn:active {
-            transform: scale(0.96);
-            background-color: #0056b3;
+            font-size: 1.1rem;
         }
     </style>
 </head>
 <body>
 
-    <div class="app-card">
-        <h1 id="title">Mobile App</h1>
-        <p id="msg">This is running from GitHub Pages!</p>
-        <button class="main-btn" onclick="triggerMagic()">Tap for Magic</button>
+    <div class="icon-preview">
+        <img src="pwa.png" alt="App Icon" style="width:100%; border-radius:20%;">
     </div>
+    
+    <h1>PWA Project</h1>
+    <p>Install this via Chrome menu!</p>
+    <button onclick="alert('Hello from your app!')">Test App</button>
 
     <script>
-        /* JavaScript: The Logic */
-        function triggerMagic() {
-            const title = document.getElementById('title');
-            const msg = document.getElementById('msg');
-            const btn = document.querySelector('.main-btn');
-
-            title.innerText = "It Works!";
-            msg.innerText = "You just built a web app on your phone.";
-            btn.style.backgroundColor = "#28a745";
-            btn.style.boxShadow = "0 4px 12px rgba(40,167,69,0.3)";
-            btn.innerText = "Amazing! ✨";
-        }
-
-        // Register the Service Worker (Required for Installation)
+        // Register the background worker
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('App ready!'))
-                    .catch(err => console.log('Error', err));
-            });
+            navigator.serviceWorker.register('sw.js');
         }
     </script>
 </body>
 </html>
-
